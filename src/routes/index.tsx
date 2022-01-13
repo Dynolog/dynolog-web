@@ -1,10 +1,10 @@
-import { Route, Switch } from 'react-router-dom';
-
-import { Game } from '../pages/Game';
+import { BrowserRouter, Route, Routes as Switch } from 'react-router-dom';
+import { Summary } from '../pages/Summary';
+import { Time } from '../pages/Time';
 
 export const Routes = () => (
   <Switch>
-    {/* <Route path="/summary" exact component={Game} /> */}
-    {/* <Route path="/time" exact component={Game} /> */}
+    <Route path="/" element={<Summary />} />
+    <Route path="/time" element={<Time />} />
   </Switch>
 );
