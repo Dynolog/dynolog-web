@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
-import { Debug } from '../../components/Debug';
+import { TimeEntryCard } from '../../components/TimeEntryCard';
+import { TimeEntryDetails } from '../../components/TimeEntryDetails';
 import TimeEntries, { TimeEntry } from '../../resources/time-entry';
 import { Container } from './styles';
 
@@ -15,14 +16,28 @@ export const Time = () => {
     }
   }, []);
 
+  const onChange = useCallback((timeEntry: TimeEntry) => {
+    setTimeEntries(old => old.map(time => time.id === timeEntry.id ? timeEntry : time));
+  }, []);
+
   useEffect(() => {
     search();
   }, [search]);
 
   return (
     <Container>
-      <h1>hello</h1>
-      <Debug data={timeEntries} />
+      <div>
+        <h1>Time entries</h1>
+      </div>
+      <ul>
+        {timeEntries.map(timeEntry => (
+          <TimeEntryCard
+            key={timeEntry.id}
+            onChange={onChange}
+            timeEntry={timeEntry}
+          />
+        ))}
+      </ul>
     </Container>
   )
 };
