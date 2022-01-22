@@ -8,7 +8,11 @@ export interface TimeEntry {
     stop: string;
 }
 
-export const index = (params: any = {}) =>
+export type TimeEntryQueryParams = {
+    user_id: number
+}
+
+export const index = (params: TimeEntryQueryParams) =>
     api.get<Page<TimeEntry>>('/time-entries', { params });
 
 export const create = (body: Omit<TimeEntry, 'id'>) =>
