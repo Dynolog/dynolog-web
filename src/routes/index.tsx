@@ -1,10 +1,8 @@
 import { Route, Routes as Switch } from 'react-router-dom';
-import { Summary } from '../pages/Summary';
-import { Time } from '../pages/Time';
+import { Dashboard } from '../pages/Dashboard';
 
 export const Routes = () => (
   <Switch>
-    <Route path="/" element={<Summary />} />
-    <Route path="/time" element={<Time />} />
+    <Route path="/" element={<Dashboard />} />
   </Switch>
 );
