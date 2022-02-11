@@ -2,14 +2,27 @@ import { api } from '../../configuration';
 import { Page } from '../shared/Page';
 
 export interface TimeEntry {
-    id: number;
+    id: string;
     description: string;
     start: string;
     stop: string;
+    user: {
+        id: string;
+        name: string;
+    };
+    project: {
+        id: string;
+        name: string;
+        color: string;
+    }
 }
 
 export type TimeEntryQueryParams = {
-    user_id: number
+    page?: number;
+    size?: number;
+    user_id: string
+    start_date: Date;
+    end_date: Date;
 }
 
 export const index = (params: TimeEntryQueryParams) =>
