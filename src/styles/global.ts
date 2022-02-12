@@ -12,19 +12,20 @@ export const GlobalStyle = createGlobalStyle`
       --shape: #FFFFFF;
       font-size: 16px;
     }
+
     #root {
-      height: 100vh;
-      width: 100vw;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+        max-width: 960px;
+        margin: 0 auto;
+        padding: 40px 20px;
     }
+
     * {
        margin: 0;
        padding: 0;
        box-sizing: border-box;
        outline: none;
     }
+
     html {
         @media (max-width: 1080px) {
             font-size: 93.75%;
@@ -33,25 +34,44 @@ export const GlobalStyle = createGlobalStyle`
             font-size: 87.5%;
         }
     }
+
     body {
         background: var(--background);
         -webkit-font-smoothing: antialiased;
     }
+
     body, input, textarea, button {
         font-family: 'Poppins', sans-serif;
         font-weight: 400;
     }
+
     h1, h2, h3, h4, h5, h6, strong {
         font-weight: 600;
     }
+
     button {
         cursor: pointer;
     }
+
     [disabled] {
         opacity: 0.6;
         cursor: not-allowed;
     }
+
     a {
         text-decoration: none;
+    }
+
+    .react-datetime-picker__wrapper, .react-time-picker__wrapper {
+        background: #fafafc;
+        font-weight: 500;
+
+        height: 46px;
+
+        box-sizing: border-box;
+        padding: 3px 3px 3px 13px;
+
+        border: 1px solid #e6e6f0 !important;
+        border-radius: 5px;
     }
 `;
