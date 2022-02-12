@@ -8,7 +8,7 @@ export type ProjectProps = {
 export const Container = styled.div``;
 
 export const Card = styled.div`
-    margin-top: 5px;
+    margin-top: 10px;
 
     display: flex;
     justify-content: space-between;
@@ -22,7 +22,9 @@ export const Card = styled.div`
         justify-content: space-between;
         gap: 0.5rem;
     }
-    `
+
+    box-shadow: rgba(17, 17, 26, 0.1) 0px 1px 0px;
+`
 
 export const Description = styled.p`
     display: flex;
@@ -59,4 +61,6 @@ export const Project = styled.span<ProjectProps>`
     border-radius: 20px;
     font-size: 8pt;
     padding: 5px 12px;
+
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
 `

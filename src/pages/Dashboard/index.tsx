@@ -22,6 +22,8 @@ export const Dashboard = () => {
   // const start_date = startOfMonth(now);
   // const end_date = endOfMonth(now);
 
+
+
   useEffect(() => {
     (async () => {
       try {
@@ -40,20 +42,22 @@ export const Dashboard = () => {
   return (
     <Container>
       <h1>Lançamentos!</h1>
-      {appointments.map(({ id, description, start, stop, project: { color: backgroundColor, name } }) => (
-        <Card key={id}>
+      {appointments.map((timeEntry) => (
+        <Card key={timeEntry.id}>
           <Description>
-            <Project background={backgroundColor} color="#fff">
-              {name}
-            </Project>
-            {description}
+            {timeEntry.project && (
+              <Project background={timeEntry.project.color} color="#fff">
+                {timeEntry.project.name}
+              </Project>
+            )}
+            {timeEntry.description}
           </Description>
           <div className="timeContainer">
-            <Time>{time({ start, stop })}</Time>
+            <Time>{time({ start: timeEntry.start, stop: timeEntry.stop })}</Time>
             <Action>
               <Button onClick={() => showDialog({
                 title: 'Editar apontamento',
-                content: <TimeEntryForm />
+                content: <TimeEntryForm timeEntry={timeEntry} />
               })}>
                 <EditIcon />
               </Button>
