@@ -1,21 +1,20 @@
-import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
-import { Button, Chip, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@mui/material';
-import { Container, Card, Action, Description, Time } from './styles';
-import { useCallback, useState } from 'react';
+import EditIcon from '@mui/icons-material/Edit';
+import { Button } from '@mui/material';
+import { useCallback, useEffect, useState } from 'react';
+import { TimeEntryForm } from '../../components/time-entry/Form';
+import { useDialog } from '../../hooks/use-dialog';
 import TimeEntries, { TimeEntry } from '../../resources/time-entry';
-import { differenceInMilliseconds, getMilliseconds, intervalToDuration, startOfMonth } from 'date-fns';
-import { useEffect } from 'react';
-import { endOfMonth } from 'date-fns/esm';
 import { toHHMMSS } from '../../utils/time';
+import { Action, Card, Container, Description, Project, Time } from './styles';
 
+const start_date = new Date('2022-01-01T03:00:00.000Z');
+const end_date = new Date('2022-01-31T03:00:00.000Z');
 
 export const Dashboard = () => {
   const [appointments, setAppointments] = useState<TimeEntry[]>([]);
 
-
-  const start_date = new Date('2022-01-01T03:00:00.000Z');
-  const end_date = new Date('2022-01-31T03:00:00.000Z');
+  const { showDialog } = useDialog();
 
   const time = useCallback(toHHMMSS, []);
 
@@ -41,16 +40,21 @@ export const Dashboard = () => {
   return (
     <Container>
       <h1>Lançamentos!</h1>
-      {appointments.map(({ description, start, stop, project: { color, name } }) => (
-        <Card>
+      {appointments.map(({ id, description, start, stop, project: { color: backgroundColor, name } }) => (
+        <Card key={id}>
           <Description>
-            <Chip size="small" label={name} style={{ backgroundColor: color, color: '#fff' }} variant="outlined" />
+            <Project background={backgroundColor} color="#fff">
+              {name}
+            </Project>
             {description}
           </Description>
           <div className="timeContainer">
             <Time>{time({ start, stop })}</Time>
             <Action>
-              <Button>
+              <Button onClick={() => showDialog({
+                title: 'Editar apontamento',
+                content: <TimeEntryForm />
+              })}>
                 <EditIcon />
               </Button>
               <Button>
@@ -60,28 +64,6 @@ export const Dashboard = () => {
           </div>
         </Card>
       ))}
-      <Dialog
-        open={false}
-        onClose={() => console.log("")}
-        aria-labelledby="alert-dialog-title"
-        aria-describedby="alert-dialog-description"
-      >
-        <DialogTitle id="alert-dialog-title">
-          {"Use Google's location service?"}
-        </DialogTitle>
-        <DialogContent>
-          <DialogContentText id="alert-dialog-description">
-            Let Google help apps determine location. This means sending anonymous
-            location data to Google, even when no apps are running.
-          </DialogContentText>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={() => console.log("")}>Disagree</Button>
-          <Button onClick={() => console.log("")} autoFocus>
-            Agree
-          </Button>
-        </DialogActions>
-      </Dialog>
     </Container>
   );
 }
