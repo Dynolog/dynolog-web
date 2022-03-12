@@ -8,7 +8,8 @@ export const GlobalStyle = createGlobalStyle`
       --blue-light: #6933FF;
       --text-title: #363F5F;
       --text-body: #969CB3;
-      --background: #F0F2F5;
+      --background: #0A0C17;
+      --background-edge: #0B0F30;
       --shape: #FFFFFF;
       font-size: 16px;
     }
@@ -27,6 +28,7 @@ export const GlobalStyle = createGlobalStyle`
     }
 
     html {
+        color: #FFFFFF;
         @media (max-width: 1080px) {
             font-size: 93.75%;
         }
@@ -36,7 +38,7 @@ export const GlobalStyle = createGlobalStyle`
     }
 
     body {
-        background: var(--background);
+        background: linear-gradient(49.74deg, var(--background) 76.41%, var(--background-edge) 100%);
         -webkit-font-smoothing: antialiased;
     }
 
